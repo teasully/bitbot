@@ -1,0 +1,67 @@
+extends layout
+
+block content
+  script.
+   var app = angular.module('app', []);
+   
+   var canUpdatePage = true;
+   socket.on('webpage', function(msg){
+    if(!canUpdatePage)return;
+    document.getElementById('contents').innerHTML = msg;
+    console.log(msg);
+    
+    document.getElementById("sellcontents")
+    .addEventListener("keyup", function(event) {
+     event.preventDefault();
+     if (event.keyCode === 13) {
+      emitMessage('changeSell', document.getElementById("sellcontents").value);
+     }
+    });
+    document.getElementById("buycontents")
+    .addEventListener("keyup", function(event) {
+     event.preventDefault();
+     if (event.keyCode === 13) {
+      emitMessage('changeBuy', document.getElementById("buycontents").value);
+     }
+    });
+   });
+   
+   function emitMessage(channel, message){
+    console.log('Sent: ' + message + ' to: ' + channel);
+    socket.emit(channel, message);
+   }
+   
+   var b_sellfocused = false, b_buyfocused = false;
+   function sellfocused(){
+    b_sellfocused = true;
+    canUpdatePage = false;
+   }   
+   function buyfocused(){
+    b_buyfocused = true;
+    canUpdatePage = false;
+   }
+   
+   function sellblurred(){
+    b_sellfocused = false;
+    if(!b_buyfocused){
+     canUpdatePage = true;
+    }
+   }
+   function buyblurred(){
+    b_buyfocused = false;
+    if(!b_sellfocused){
+     canUpdatePage = true;
+    }
+   }
+   
+   app.controller('Controller', function($scope) {
+    window.scope = $scope;
+   });
+   
+  h1 Welcome to CryptoBot
+  hr
+  div(id='contents')
+  br
+  br
+  hr
+  p Thomas Sullivan &copy;2017

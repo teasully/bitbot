@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css')
+    script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js")
+    script.
+     var socket = io();
+     
+     socket.on('disconnect', function(){
+      console.log('disconnected');
+      /*while(socket == null){
+       socket = io();
+      }
+      console.log('connected');*/
+     });
+  body(ng-app="app" ng-controller="Controller")
+    div(class="container")
+     block content

@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  script.
+   var app = angular.module('app', []);
+   
+   var currentPrices;
+   socket.on('pricesSend', function(msg){
+    // Format %
+    for(var i = 0; i < msg.length; i++){
+     msg[i].price24Hours = Number.parseFloat(((msg[i].price - msg[i].price24Hours) / msg[i].price24Hours * 100).toFixed(2));
+    }
+    // Set new coinData and apply
+    window.scope.coinData = msg;
+    window.scope.$apply();
+   });
+   
+   app.controller('Controller', function($scope) {
+    window.scope = $scope;
+    $scope.sortMethod = 'price';
+    $scope.sortReverse = true;
+   });
+   
+   function onHeaderClick(name){
+    if(window.scope.sortMethod == name){
+     window.scope.sortReverse = !window.scope.sortReverse;
+    } else {
+     window.scope.sortMethod = name;
+     window.scope.sortReverse = (name == 'price' || name == 'price24Hours' ? true : false);
+    }
+    window.scope.$apply();
+   }
+   
+  h1 Welcome to CryptoCompare
+  hr
+  input(type='text' ng-model='filterResults')
+  br
+  br
+  table(align='center' class='table-striped table-hover' id='cointable')
+   tr
+    th(id="headerName" onclick='onHeaderClick(\'name\')') Coin
+    th(id="headerPrice" onclick='onHeaderClick(\'price\')') Price
+    th(id="headerPercent" onclick='onHeaderClick(\'price24Hours\')') 24 HR %
+   tr(ng-repeat="coin in coinData | orderBy:sortMethod:sortReverse | filter:filterResults")
+    td {{coin.name}}
+    td ${{coin.price}}
+    td {{coin.price24Hours}}%
+  hr
+  p Thomas Sullivan &copy;2017

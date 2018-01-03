@@ -1,0 +1,26 @@
+{
+  "name": "crypto0",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "angular": "^1.6.8",
+    "aws-sdk": "^2.175.0",
+    "binance": "^1.1.2",
+    "body-parser": "~1.18.2",
+    "bootstrap": "^3.3.7",
+    "cookie-parser": "~1.4.3",
+    "cryptocompare": "^0.3.0",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0",
+    "node-fetch": "^1.7.3",
+    "serve-favicon": "~2.4.5",
+    "socket.io": "^2.0.4",
+    "ta-lib": "^0.11.0",
+    "technicalindicators": "^1.0.21"
+  }
+}
