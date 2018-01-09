@@ -387,6 +387,7 @@ function Bot(name){
   });
   // Start polling
    var _t = this;
+   this.Loop();
    setInterval(function(){_t.Loop();}, 1000 * 30);
    setInterval(EmitStatus, 2500);
   };
@@ -407,7 +408,7 @@ function Bot(name){
    var parsedCoin = this.coins[i].substring(0, 3);
    var coinTotal = 0;
    for(var u in this.bank[parsedCoin]){
-    coinTotal += this.bank[parsedCoin].amount;
+    coinTotal += this.bank[parsedCoin][u].amount;
    }
    total += (coinTotal * this.total_stats[this.coins[i]].currentPrice);
   }
@@ -425,7 +426,7 @@ function Bot(name){
    html += GetWrappedElement('td', parsedCoin);
    var coinTotal = 0;
    for(var u in this.bank[parsedCoin]){
-    coinTotal += this.bank[parsedCoin].amount;
+    coinTotal += this.bank[parsedCoin][u].amount;
    }
    html += GetWrappedElement('td', coinTotal);
    html += GetWrappedElement('td', this.total_stats[this.coins[i]].swing);
