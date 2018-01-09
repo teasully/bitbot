@@ -35,7 +35,7 @@ InitBinanceAPI();
 function Bot(name){
  this.name = name;
  // Initialize coin/interval info
- this.coins = ['TRXETH', 'XRPETH', 'POEETH', 'FUNETH', 'ADAETH', 'XVGETH', 'REQETH', 'RCNETH', 'OSTETH', 'XLMETH', 'OMGETH', 'NEOETH' 'ICXETH'];
+ this.coins = ['TRXETH', 'XRPETH', 'POEETH', 'FUNETH', 'ADAETH', 'XVGETH', 'REQETH', 'RCNETH', 'OSTETH', 'XLMETH', 'OMGETH', 'NEOETH', 'ICXETH'];
  this.intervals = ['1m', '5m', '15m', '30m', '1h'];
  this.functions = ['MFI', 'CCI', 'WilliamsR', 'VWAP'];
  this.period = 15; // Amount of data passed to functions. Less data makes them more responsive.
